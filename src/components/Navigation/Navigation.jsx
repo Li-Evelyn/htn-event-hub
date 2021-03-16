@@ -10,7 +10,8 @@ const NavItems = [
 ]
 
 const Navigation = (props) => {
-    const [darkMode, setDarkMode] = useState(false); // hehexd
+    const stored_dark_mode = localStorage.getItem("DARK_MODE");
+    const [darkMode, setDarkMode] = useState(stored_dark_mode == "true");
 
     const toggleDarkMode = () => setDarkMode(!darkMode);
 
@@ -23,17 +24,18 @@ const Navigation = (props) => {
         app.classList.remove("dark");
         app.classList.add("light");
         }
+        localStorage.setItem("DARK_MODE", darkMode);
     }, [darkMode]);
 
     return (
         <div className="nav justify-content-end" activeKey="/">
-            <div className="nav-item">
+            <div className="nav-item selection">
                 <div onClick={toggleDarkMode} className="nav-text">{darkMode ? "LIGHT" : "DARK"} MODE</div>
             </div>
             {
                 Object.keys(NavItems).map((key, value) => {
                     return (
-                        <div className="nav-item">
+                        <div className="nav-item selection">
                             <a className="nav-text" href={NavItems[key].link}>{NavItems[key].label}</a>
                         </div>
                     )

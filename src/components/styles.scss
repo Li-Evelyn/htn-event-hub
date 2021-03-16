@@ -57,10 +57,11 @@ $colours: (
   &-time {
     margin-bottom: 0.2em;
   }
-  &:hover {
-    opacity: 0.5;
-    cursor: pointer;
-  }
+}
+
+.selection:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 .icon {
@@ -69,6 +70,10 @@ $colours: (
 
 a {
   color: inherit;
+  :hover {
+    text-decoration: none;
+    color: inherit;
+  }
   &.url {
     :hover {
       text-decoration: none;
@@ -126,6 +131,11 @@ a {
   justify-content: center;
 }
 
+.rel {
+  padding: 0.5em;
+  text-align: center;
+}
+
 .filter {
   outline: 1px solid black;
 }
@@ -149,5 +159,11 @@ a {
     text-align: left;
     display: flex;
     justify-content: center;
+  }
+  &-heading {
+    font-size: 1.5em;
+  }
+  &-section {
+    padding: 0em 0.5em 0.75em 0.5em;
   }
 }
