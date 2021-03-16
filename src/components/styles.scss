@@ -1,0 +1,153 @@
+$colours: (
+  "dark": #1D1C22,
+  "light": #EFF7FB,
+  "mid": #26252D,
+  "purple": #B785D5,
+  "green": #B6D35F,
+  "orange": #FF7F5C,
+);
+
+#App {
+  text-align: center;
+  text-decoration: none;
+}
+
+.light {
+  background-color: map-get($colours, "light");
+  color: map-get($colours, "dark");
+}
+
+.dark {
+  background-color: map-get($colours, "dark");
+  color: map-get($colours, "light");
+}
+
+.purple {
+  color: map-get($colours, "purple");
+}
+
+.green {
+  color: map-get($colours, "green");
+}
+
+.orange {
+  color: map-get($colours, "orange");
+}
+
+.card {
+  display: inline-block;
+  width: 90%;
+  text-decoration: none;
+  background-color: inherit;
+  color: inherit;
+  padding: 0.2em;
+  &-container {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0.2em;
+  }
+  &-title {
+    margin-bottom: 0px;
+    font-size: 1.5em;
+  }
+  &-etype {
+    font-size: 1em;
+    padding: 0px;
+  }
+  &-time {
+    margin-bottom: 0.2em;
+  }
+  &:hover {
+    opacity: 0.5;
+    cursor: pointer;
+  }
+}
+
+.icon {
+  opacity: 0.75;
+}
+
+a {
+  color: inherit;
+  &.url {
+    :hover {
+      text-decoration: none;
+      color: inherit;
+    }
+  }
+}
+
+.nav {
+  background: map-get($colours, "mid");
+  height: 3em;
+  &-text {
+    &:hover {
+      text-decoration: inherit;
+      color: map-get($colours, "light");
+    }
+  }
+  &-item {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    padding: 0.75em 2em;
+    color: map-get($colours, "light");
+    &:hover {
+      text-decoration: none;
+      opacity: 0.5;
+      background-color: map-get($colours, "dark");
+      cursor: pointer;
+      color: map-get($colours, "light");
+    }
+  }
+}
+
+.title {
+  color: inherit;
+  font-size: 3em;
+  &-box {
+    padding: 1em;
+  }
+  &-sub {
+    font-size: 1em;
+    &-box {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding: 1em;
+    }
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  justify-content: center;
+}
+
+.filter {
+  outline: 1px solid black;
+}
+
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+
+.event {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  &-body {
+    width: 60%;
+    align-self: center;
+    text-align: left;
+    display: flex;
+    justify-content: center;
+  }
+}
