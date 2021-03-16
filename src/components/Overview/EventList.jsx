@@ -5,7 +5,7 @@ export const EventList = ({ events, ...props}) => {
 
     return (
         <div>
-            { events &&
+            { events.length ?
                 events.map((event) => {
                     return (
                         <EventItem
@@ -17,7 +17,9 @@ export const EventList = ({ events, ...props}) => {
                             end_time={event["end_time"]}
                         />
                     );
-                })}
+                })
+                : <div className="couldntfetch col-12 left">Sorry! We couldn't fetch any events with those criteria 😔 Try signing in or changing your filters!</div>
+            }
         </div>
     );
 };

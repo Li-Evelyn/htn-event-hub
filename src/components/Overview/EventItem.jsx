@@ -12,7 +12,7 @@ export const EventItem = ({
 }) => {
 
     return (
-        <Card body id={`event-card${id}`} className={"card col-10 left selection"} onClick={() => history.push(`/event/${id}`)}>
+        <Card body id={`event-card${id}`} className="col-10 left selection" onClick={() => history.push(`/event/${id}`)}>
             <div className="card-container">
                 <div className="col-10 card-title">{title}</div>
                 <div className={`col-2 card-etype right ${event_colour[event_type]}`}>{clean_event_type(event_type)}</div>

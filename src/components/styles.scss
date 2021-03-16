@@ -139,7 +139,18 @@ a {
 }
 
 .filter {
-  outline: 1px solid black;
+  // outline: 1px solid black;
+  text-align: left;
+  &-title {
+    // padding-bottom: 1em;
+    align-self: center;
+    padding-left: 1em;
+    padding-top: 1em;
+  }
+  &-option {
+    color: inherit;
+    background-color: inherit;
+  }
 }
 
 .left {
@@ -214,4 +225,13 @@ a {
       border-color: map-get($colours, "mid") !important;
     }
   }
+}
+
+.footer {
+  padding: 3em;
+}
+
+.couldntfetch {
+  padding: 3em;
+  margin-right: 40em;
 }
