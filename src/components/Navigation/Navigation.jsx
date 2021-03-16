@@ -5,8 +5,7 @@ import { Nav } from "react-bootstrap";
 
 const NavItems = [
     { label: "EVENTS", link: "/" },
-    { label: "WRITE-UP", link: "/writeup"},
-    { label: "SIGN IN", link: "/login"}
+    { label: "WRITE-UP", link: "/writeup"}
 ]
 
 const Navigation = (props) => {
@@ -14,6 +13,15 @@ const Navigation = (props) => {
     const [darkMode, setDarkMode] = useState(stored_dark_mode == "true");
 
     const toggleDarkMode = () => setDarkMode(!darkMode);
+
+    let signed_in = localStorage.getItem("SIGNED_IN");
+
+    const handleClick = () => {
+        if (signed_in) {
+            localStorage.removeItem("SIGNED_IN");
+        }
+        history.push("/login");
+    }
 
     useEffect(() => {
         const app = document.getElementById("App");
@@ -41,6 +49,9 @@ const Navigation = (props) => {
                     )
                 })
             }
+            <div className="nav-item selection">
+                <div onClick={handleClick} className="nav-text">{signed_in ? "SIGN OUT" : "SIGN IN"}</div>
+            </div>
         </div>
     )
 }

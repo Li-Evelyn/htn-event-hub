@@ -11,8 +11,12 @@ const Overview = (props) => {
         axios.get(`https://api.hackthenorth.com/v3/graphql?query={ events { id name event_type permission start_time end_time description } }`)
         .then((res) => res.data)
         .then((data) => {
-            setEvents(data["data"]["events"]);
-            console.log(data["data"]["events"]);
+            data = data["data"]["events"];
+            if (!localStorage.getItem("SIGNED_IN")) {
+                data = data.filter((key) => key["permission"] === "public")
+            }
+            setEvents(data);
+            console.log(data);
         })
         .catch((err) => console.error(`Error: ${err.message}`))
     }

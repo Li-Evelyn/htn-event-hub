@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { event_colour, clean_event_type, convert } from "../_helpers";
+import { history, event_colour, clean_event_type, convert } from "../_helpers";
 import { Card } from "react-bootstrap";
 import placeholder from '../../assets/placeholder.png';
 import axios from "axios";
@@ -15,6 +15,9 @@ const EventPage = ({ match, location }) => {
         axios.get(`https://api.hackthenorth.com/v3/graphql?query={ event(id: ${id}) { id name event_type permission start_time end_time description speakers { name profile_pic } public_url private_url related_events } }`)
         .then((res) => res.data["data"]["event"])
         .then((data) => {
+            if (data["permission"] == "private" && !localStorage.getItem("SIGNED_IN")) {
+                history.push("/");
+            }
             setEvent(data);
             for (let eve of data["related_events"]) {
                 promises.push(
@@ -59,7 +62,7 @@ const EventPage = ({ match, location }) => {
                                     <div>
                                         <div className="event-heading">Speakers</div>
                                         {
-                                            event["speakers"].map((speaker) => { // name + image
+                                            event["speakers"].map((speaker) => {
                                                 return (
                                                     <Card>
                                                         <Card.Img variant="top" src={`${speaker["profile_pic"] ? speaker["profile_pic"] : placeholder}`} />
@@ -78,8 +81,8 @@ const EventPage = ({ match, location }) => {
                                 <div className="right col-4">
                                     <div className="event-heading">Related Events</div>
                                         {
-                                            relatedEvents.map((event) => {
-                                                return <a className="card rel selection" href={`/event/${event["id"]}`}>{event["name"]}</a> // check for permissions here
+                                            relatedEvents.map((event) => { //persmissions
+                                                return <a className="card rel selection" href={`/event/${event["id"]}`}>{event["name"]}</a>
                                             })
                                         }
                                 </div>
