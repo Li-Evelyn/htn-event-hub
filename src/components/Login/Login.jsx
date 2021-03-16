@@ -16,9 +16,10 @@ const Login = (props) => {
         if (username === "typhlosion" && password === "baddinos") {
             localStorage.setItem("SIGNED_IN", true);
             console.log(localStorage.getItem("SIGNED_IN"));
-
+            history.push("/");
         } else {
             setErrorVisible(true);
+            setPassword("");
         }
     }
 

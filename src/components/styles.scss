@@ -23,15 +23,15 @@ $colours: (
 }
 
 .purple {
-  color: map-get($colours, "purple");
+  color: map-get($colours, "purple") !important;
 }
 
 .green {
-  color: map-get($colours, "green");
+  color: map-get($colours, "green") !important;
 }
 
 .orange {
-  color: map-get($colours, "orange");
+  color: map-get($colours, "orange") !important;
 }
 
 .card {
@@ -70,9 +70,11 @@ $colours: (
 
 a {
   color: inherit;
-  :hover {
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none !important;
+    color: inherit !important;
   }
   &.url {
     :hover {
@@ -162,6 +164,7 @@ a {
   }
   &-heading {
     font-size: 1.5em;
+    padding-bottom: 0.5em;
   }
   &-section {
     padding: 0em 0.5em 0.75em 0.5em;

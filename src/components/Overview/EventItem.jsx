@@ -1,24 +1,11 @@
 import React, { useState } from "react";
 import { Card } from "react-bootstrap";
-import { convert, clean_event_type, history, event_colour} from "../_helpers";
-import { PeopleFill, ChatQuote, Hammer} from "react-bootstrap-icons";
-
-const IconPicker = (event_type) => {
-    const size = 110;
-    if (event_type == "workshop") {
-        return <Hammer size={size} color="#B785D5" className="icon"/>
-    } else if (event_type == "activity") {
-        return <PeopleFill size={size} color="#B6D35F" className="icon" />
-    } else if (event_type == "tech_talk") {
-        return <ChatQuote size={size} color="#FF7F5C" className="icon" />
-    }
-}
+import { convert, clean_event_type, history, event_colour, event_icon} from "../_helpers";
 
 export const EventItem = ({
     id,
     title,
     event_type,
-    permission,
     description,
     start_time,
     end_time,
@@ -35,7 +22,7 @@ export const EventItem = ({
                 <div className="col-10">{description}</div>
                 <div className="col-1"/>
                 {
-                    IconPicker(event_type)
+                    event_icon(110)[event_type]
                 }
             </div>
         </Card>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { history, event_colour, clean_event_type, convert } from "../_helpers";
+import { history, event_colour, clean_event_type, convert, event_icon } from "../_helpers";
 import { Card } from "react-bootstrap";
 import placeholder from '../../assets/placeholder.png';
 import axios from "axios";
@@ -21,7 +21,7 @@ const EventPage = ({ match, location }) => {
             setEvent(data);
             for (let eve of data["related_events"]) {
                 promises.push(
-                    axios.get(`https://api.hackthenorth.com/v3/graphql?query={ event(id: ${eve}) { id name permission } }`)
+                    axios.get(`https://api.hackthenorth.com/v3/graphql?query={ event(id: ${eve}) { id name permission event_type} }`)
                     .then((res) => res.data["data"]["event"])
                     .then((data) => {
                         items.push(data);
@@ -81,8 +81,12 @@ const EventPage = ({ match, location }) => {
                                 <div className="right col-4">
                                     <div className="event-heading">Related Events</div>
                                         {
-                                            relatedEvents.map((event) => { //persmissions
-                                                return <a className="card rel selection" href={`/event/${event["id"]}`}>{event["name"]}</a>
+                                            relatedEvents.map((event) => {
+                                                console.log(event_colour[event["event_type"]])
+                                                return (
+                                                    (event["permission"] === "public" || localStorage.getItem("SIGNED_IN")) &&
+                                                    <a className={`card rel selection`} href={`/event/${event["id"]}`}>{event["name"]} {event_icon(20)[event["event_type"]]}</a>
+                                                )
                                             })
                                         }
                                 </div>
