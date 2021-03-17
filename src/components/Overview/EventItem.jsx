@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Card } from "react-bootstrap";
 import { convert, clean_event_type, history, event_colour, event_icon} from "../_helpers";
 

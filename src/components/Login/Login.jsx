@@ -39,7 +39,6 @@ const Login = () => {
                 {errorVisible && <div className="login-error">Incorrect credentials 😔</div>}
                 <Button type="button" className="login-button" onClick={handleSubmit}>Submit</Button>
             </form>
-            <h1 className="footer title">...and enter Hack the North!</h1>
         </div>
     )
 }

@@ -10,27 +10,30 @@ const Overview = (props) => {
     let [activeKey, setActiveKey] = useState("-1");
     let [currentFilters, setCurrentFilters] = useState([]);
 
+    // types of sorts
     const sorts = [
         { label: "Start time", fcn: (a, b) => a.start_time - b.start_time},
         { label: "Duration", fcn: (a, b) => (a.end_time - a.start_time) - (b.end_time - b.start_time)},
         { label: "Name", fcn: (a, b) => a.name.localeCompare(b.name)},
     ]
 
+    // types of filters
     const filters = [
         { label: "Workshop", cmp: "workshop"},
         { label: "Tech Talk", cmp: "tech_talk"},
         { label: "Activity", cmp: "activity"},    
     ]
 
+    // fetch the events and filter based on the currently-selected filters
     let fetchEvents = () => {
         axios.get(`https://api.hackthenorth.com/v3/graphql?query={ events { id name event_type permission start_time end_time description } }`)
         .then((res) => res.data)
         .then((data) => {
             data = data["data"]["events"];
-            if (!localStorage.getItem("SIGNED_IN")) {
+            if (!localStorage.getItem("SIGNED_IN")) { // if the user is not signed in, filter out all private events
                 data = data.filter((key) => key["permission"] === "public")
             }
-            if (currentFilters.length) {
+            if (currentFilters.length) { // if filters are selected, filter accordingly (do not filter anything if no filters are selected)
                 data = data.filter((key) => currentFilters.indexOf(key["event_type"]) > -1);
             }
             setEvents(data);
@@ -39,10 +42,13 @@ const Overview = (props) => {
         .catch((err) => console.error(`Error: ${err.message}`))
     }
 
+    // update the events list whenever the page is navigated to or the sort/filter(s) have been changed
     useEffect(() => {
         fetchEvents();
     }, [window.location.pathname, currentSort, currentFilters]);
 
+    // change the sort based off of the current sort - the items in the dropdown should always appear in the same 
+    // order as that of their array placement or as close as possible (i.e. 012, 102, 201)
     let changeSort = (sort) => {
         let newSort = 0;
         if (sort == 1) {
@@ -58,15 +64,16 @@ const Overview = (props) => {
                 newSort = (currentSort + 2) % 3;
             }
         }
-        localStorage.setItem("EVENT_SORT", newSort);
+        localStorage.setItem("EVENT_SORT", newSort); // persist the sort type across refreshes
         setCurrentSort(newSort);
     }
 
+    // add or remove filters depending on which boxes have been checked
     let handleFilter = (e) => {
         if (e.target.checked) {
-            setCurrentFilters([...currentFilters, e.target.id]); // check that this is the correct attr
+            setCurrentFilters([...currentFilters, e.target.id]);
         } else {
-            setCurrentFilters(currentFilters.filter((item) => item !== e.target.id)); // same here
+            setCurrentFilters(currentFilters.filter((item) => item !== e.target.id));
         }
     }
 
@@ -77,8 +84,12 @@ const Overview = (props) => {
                 <div className="title-sub">Click on an event to learn more about it!</div>
             </div>
             <div className="list">
+                {/* event list */}
                 <EventList events={events.sort(sorts[currentSort]["fcn"])}/>
+
+                {/* sorting/filtering */}
                 <div className="col-3 filter">
+                    {/* sorting */}
                     <div className="">
                         <div className="card-title filter-title">Sort by...</div>
                         <Accordion activeKey={activeKey} onSelect={(e) => setActiveKey(e)}>
@@ -98,6 +109,8 @@ const Overview = (props) => {
                         </Accordion>
                     </div>
                     <br/>
+                   
+                    {/* filtering */}
                     <div>
                         <div className="card-title filter-title">Filter by...</div>
                         <Form className="" onChange={handleFilter}>

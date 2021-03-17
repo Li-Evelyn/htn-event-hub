@@ -1,11 +1,18 @@
-import React, { useState } from "react"
-import { history } from "../_helpers";
-import axios from "axios";
+import React, { useState } from "react";
+import text from "../../assets/writeup.txt";
 
-const WriteUp = (props) => {
+
+const WriteUp = () => {
+    const [writeup, setWriteup] = useState("");
+    fetch(text).then(t => t.text()).then((text) => setWriteup(text)); // grab the text from the asset file
     return (
         <div>
-            hello
+            <div className="title-box">
+                <div className="title">Write Up</div>
+            </div>
+            <div className="writeup">
+                {writeup}
+            </div>
         </div>
     )
 }

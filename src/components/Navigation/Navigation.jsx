@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react"
 import { history } from "../_helpers";
-import axios from "axios";
-import { Nav } from "react-bootstrap";
 
-const NavItems = [
+const NavItems = [ // these are constant - dark/light mode label updates based on the mode, and sign in/out updates based of of that particular state
     { label: "EVENTS", link: "/" },
     { label: "WRITE-UP", link: "/writeup"}
 ]
 
-const Navigation = (props) => {
-    const stored_dark_mode = localStorage.getItem("DARK_MODE");
+const Navigation = () => {
+    const stored_dark_mode = localStorage.getItem("DARK_MODE"); // persisting dark mode
     const [darkMode, setDarkMode] = useState(stored_dark_mode == "true");
 
     const toggleDarkMode = () => setDarkMode(!darkMode);
 
-    let signed_in = localStorage.getItem("SIGNED_IN");
+    let signed_in = localStorage.getItem("SIGNED_IN"); // check if the user is signed in
 
+    // handles the click on the sign in/out button - log out if the user is signed in and redirect to the login page regardless
     const handleClick = () => {
         if (signed_in) {
             localStorage.removeItem("SIGNED_IN");
@@ -23,14 +22,17 @@ const Navigation = (props) => {
         history.push("/login");
     }
 
+    // toggle dark mode
     useEffect(() => {
-        const app = document.getElementById("App");
-        if (darkMode) {
-        app.classList.add("dark");
-        app.classList.remove("light");
-        } else {
-        app.classList.remove("dark");
-        app.classList.add("light");
+        const arr = [document.getElementById("App"), document.getElementsByTagName("body")[0], document.getElementsByTagName("html")[0]];
+        for (let elem of arr) {
+            if (darkMode) {
+                elem.classList.add("dark");
+                elem.classList.remove("light");
+            } else {
+                elem.classList.remove("dark");
+                elem.classList.add("light");
+            }
         }
         localStorage.setItem("DARK_MODE", darkMode);
     }, [darkMode]);
@@ -52,6 +54,7 @@ const Navigation = (props) => {
             <div className="nav-item selection">
                 <div onClick={handleClick} className="nav-text">{signed_in ? "SIGN OUT" : "SIGN IN"}</div>
             </div>
+            
         </div>
     )
 }
