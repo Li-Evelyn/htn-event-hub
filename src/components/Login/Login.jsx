@@ -7,21 +7,21 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [errorVisible, setErrorVisible] = useState(false);
 
-    const correct_username = "test";
+    const correct_username = "test"; // hardcoded login creds
     const correct_password = "1234";
 
-    if (localStorage.getItem("SIGNED_IN")) {
+    if (localStorage.getItem("SIGNED_IN")) { // prevent viewing the login page if the user is already signed in
         history.push("/");
     }
 
-    let handleSubmit = () => {
+    let handleSubmit = () => { // very basic authentication
         if (username === correct_username && password === correct_password) {
             localStorage.setItem("SIGNED_IN", true);
             console.log(localStorage.getItem("SIGNED_IN"));
             history.push("/");
         } else {
-            setErrorVisible(true);
-            setPassword("");
+            setErrorVisible(true); // show the error message
+            setPassword(""); // remove the password ("security" reasons)
         }
     }
 

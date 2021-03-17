@@ -1,3 +1,5 @@
+// convert a unix timestamp to a displayable datetime
+
 export function convert(timestamp) {
     var months = ["January", "February", "March", "April", "May", "June", 
                 "July", "August", "September", "October", "November", "December"];

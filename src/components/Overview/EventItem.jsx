@@ -11,7 +11,7 @@ export const EventItem = ({
     end_time,
 }) => {
 
-    return (
+    return ( // use helper functions to clean up data for viewing
         <Card body id={`event-card${id}`} className="col-10 left selection" onClick={() => history.push(`/event/${id}`)}>
             <div className="card-container">
                 <div className="col-10 card-title">{title}</div>

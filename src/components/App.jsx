@@ -8,7 +8,6 @@ import { history } from "./_helpers";
 import { Login } from "./Login";
 import { Overview } from "./Overview";
 import { EventPage } from "./EventPage";
-import { WriteUp } from "./WriteUp";
 import { Navigation } from "./Navigation"; 
 
 function App() {
@@ -21,7 +20,6 @@ function App() {
           <Route exact path="/" component={Overview}/>
           <Route exact path="/event/:id" component={EventPage}/>
           <Route exact path="/login" component={Login}/>
-          <Route exact path="/writeup" component={WriteUp}/>
         </Switch>
       </div>
     </Router>

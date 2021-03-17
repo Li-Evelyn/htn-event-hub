@@ -6,7 +6,7 @@ import { ChevronUp, ChevronDown } from "react-bootstrap-icons";
 
 const Overview = (props) => {
     let [events, setEvents] = useState([]);
-    let [currentSort, setCurrentSort] = useState(localStorage.getItem("EVENT_SORT") ? localStorage.getItem("EVENT_SORT") : 0);
+    let [currentSort, setCurrentSort] = useState(localStorage.getItem("EVENT_SORT") ? localStorage.getItem("EVENT_SORT") : 0); // start at "start time"
     let [activeKey, setActiveKey] = useState("-1");
     let [currentFilters, setCurrentFilters] = useState([]);
 

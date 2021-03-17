@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react"
 import { history } from "../_helpers";
 
 const NavItems = [ // these are constant - dark/light mode label updates based on the mode, and sign in/out updates based of of that particular state
-    { label: "EVENTS", link: "/" },
-    { label: "WRITE-UP", link: "/writeup"}
+    { label: "EVENTS", link: "/" }, // can add more elements with other pathnames
 ]
 
 const Navigation = () => {
@@ -22,7 +21,7 @@ const Navigation = () => {
         history.push("/login");
     }
 
-    // toggle dark mode
+    // toggle dark mode for all "big" elements
     useEffect(() => {
         const arr = [document.getElementById("App"), document.getElementsByTagName("body")[0], document.getElementsByTagName("html")[0]];
         for (let elem of arr) {

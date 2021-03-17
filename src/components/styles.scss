@@ -7,7 +7,7 @@ $colours: (
   "orange": #FF7F5C,
 );
 
-html, body {
+html, body { // for preventing large, unused white boxes
   height: 100%;
   width: 100%;
   margin: 0;
@@ -146,10 +146,8 @@ a {
 }
 
 .filter {
-  // outline: 1px solid black;
   text-align: left;
   &-title {
-    // padding-bottom: 1em;
     align-self: center;
     padding-left: 1em;
     padding-top: 1em;
@@ -234,10 +232,6 @@ a {
   }
 }
 
-.footer {
-  // padding: 6em;
-}
-
 .couldntfetch {
   padding: 3em;
   margin-right: 40em;
@@ -247,4 +241,9 @@ a {
   display: flex;
   width: 80%;
   text-align: left;
+  flex-direction: column;
+}
+
+.para {
+  padding: 1em;
 }
